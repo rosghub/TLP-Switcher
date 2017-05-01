@@ -1,0 +1,7 @@
+{
+	"extension-id": "ID-TLPSwitcher", 
+	"name": "TLP Switcher", 
+	"shell-version": ["3.24.1"], 
+	"description": "Switch TLP configurations", 
+	"uuid": "TLP_Switcher@2dsmartapps.gmail.com"
+}
