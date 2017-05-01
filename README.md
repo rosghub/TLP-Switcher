@@ -7,7 +7,9 @@ TLP-Switcher is very basic gnome shell extension for switching TLP configuration
 ## Dependencies
 - TLP
 
-## How To
+## Install
+Download and extract zip to `~/.local/share/gnome-shell/extensions/`, and restart gnome shell.
+
 Place TLP configuration files in `~/.tlp/`.
 
 Create a new profile:
@@ -18,6 +20,6 @@ or
 
 `cp /etc/default/tlp ~/.tlp/MyProfile`
 
-Selecting a profile will prompt you to run [tlp_update.sh](tlp_update.sh) as root. This script copys your profile to `/etc/default/tlp` and runs `tlp start`. 
+Selecting a profile will prompt you for root access to run [tlp_update.sh](tlp_update.sh). This script copys your profile to `/etc/default/tlp` and runs `tlp start`. 
 
 Changes to `~/.tlp/` (adding/removing profiles) are reflected (not applied) automatically.
