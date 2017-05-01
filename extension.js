@@ -16,7 +16,7 @@ const TLPButton = new Lang.Class({
 	Extends: PanelMenu.Button,
 	
 	_init: function() {
-		this.parent(0.0, "TLP Switcher");
+		this.parent(0.0, 'TLP Switcher');
 		
 		// panel icon
 		
@@ -54,7 +54,7 @@ const TLPButton = new Lang.Class({
 	},
 	
 	_updateProfiles: function() {
-		
+
 		// clear existing
 		
 		this._menuProfiles.removeAll();
@@ -63,7 +63,7 @@ const TLPButton = new Lang.Class({
 		this._profiles = output[1].toString().split('\n');
 		this._profiles.pop();
 		
-		if (output[2].toString().includes('No such file or directory')) 
+		if (output[2].toString().indexOf('No such file or directory') != -1) 
 			GLib.spawn_command_line_async('mkdir ' + this._profileDir);
 		
 		let len = this._profiles.length;
