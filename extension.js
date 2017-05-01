@@ -1,12 +1,10 @@
 const St = imports.gi.St;
 const Main = imports.ui.main;
-const Panel = imports.ui.panel;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Util = imports.misc.util;
 
 const PROFILE_DIR = '/.tlp/';
@@ -58,10 +56,14 @@ const TLPButton = new Lang.Class({
 		// clear existing
 		
 		this._menuProfiles.removeAll();
+		
+		// list profiles
 	
 		let output = GLib.spawn_command_line_sync('ls ' + this._profileDir);
 		this._profiles = output[1].toString().split('\n');
 		this._profiles.pop();
+		
+		// create directory if it doesn't exist
 		
 		if (output[2].toString().indexOf('No such file or directory') != -1) 
 			GLib.spawn_command_line_async('mkdir ' + this._profileDir);
@@ -111,7 +113,7 @@ const TLPButton = new Lang.Class({
 		
 		let script = Me.dir.get_path() + '/tlp_update.sh';
 		let [parsed, args] = 
-			GLib.shell_parse_argv('/usr/bin/pkexec /bin/bash '.concat(script, ' ', this._profileDir, this._profiles[index]));
+			GLib.shell_parse_argv('/usr/bin/pkexec /bin/bash '.concat(script, ' \'', this._profileDir, this._profiles[index], '\''));
 		if (parsed)
 			Util.spawn(args);
 	},
@@ -124,7 +126,7 @@ const TLPButton = new Lang.Class({
 		let profile;
 		
 		for (let i = 0; i < this._profiles.length; ++i) {
-			profile = GLib.spawn_command_line_sync('cat '.concat(this._profileDir, this._profiles[i]))[1].toString().split('\n');
+			profile = GLib.spawn_command_line_sync('cat \''.concat(this._profileDir, this._profiles[i], '\''))[1].toString().split('\n');
 			
 			if (this._profileMatch(config, profile)) {
 				this._itemProfiles[i].setOrnament(PopupMenu.Ornament.DOT);
@@ -155,5 +157,4 @@ function enable() {
 function disable() {
 	button.destroy();
 }
-		
-		
+
