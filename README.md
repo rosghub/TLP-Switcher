@@ -15,7 +15,7 @@ Place TLP configuration files in `~/.tlp/`.
 
 Create a new profile:
 
-`tlp-stat -c >> ~/.tlp/MyProfile`
+`tlp-stat -c > ~/.tlp/MyProfile`
 
 or
 
