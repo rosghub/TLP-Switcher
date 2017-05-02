@@ -142,7 +142,7 @@ const TLPButton = new Lang.Class({
 		}
 		
 		return true;
-	},
+	}
 });
 
 function init() {}
