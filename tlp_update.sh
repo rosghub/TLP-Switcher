@@ -1,2 +1,2 @@
 #!/bin/bash
-cp "$@" /etc/default/tlp && tlp start
+cp "$@" /etc/tlp.conf && tlp start
