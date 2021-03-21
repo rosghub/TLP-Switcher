@@ -6,5 +6,6 @@
 		"3.24.1"
 	], 
 	"description": "Switch TLP configurations", 
-	"uuid": "TLP_Switcher@2dsmartapps.gmail.com"
+	"uuid": "TLP_Switcher@2dsmartapps.gmail.com",
+	"version": 2
 }

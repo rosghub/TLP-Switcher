@@ -136,12 +136,41 @@ const TLPButton = new Lang.Class({
 	},
 	
 	_profileMatch: function(config, profile) {
-		for (let i = 3; i < config.length; ++i) {
-			if (config[i] && profile.indexOf(config[i]) == -1)
-				return false;
+	
+		let stripDefaultsFromConfig = function (config)
+		{
+			const regex = new RegExp('(^.*L[0-9]{4}: )|(")|(^ *)|( *$)','g');
+
+			let nonDefaults = [];
+			for (let i = 0; i < config.length; i++) {
+				let line = config[i];
+				
+				// ignore any default values, comments or empty lines
+				if (line.startsWith('defaults.conf') || line.startsWith('-') || line.startsWith('+') || line.match(/^ *$/) || line.startsWith('#')) {
+					continue;
+				}
+
+				nonDefaults.push(line.replace(regex, ''));
+			}
+
+			return nonDefaults.sort();
+		}
+
+		// strip any unnecessary information before comparison
+		config = stripDefaultsFromConfig(config);
+		profile = stripDefaultsFromConfig(profile);
+	
+		if (config.length !== profile.length)
+		{
+			return false;
+		}
+	
+		if (config.every((v,i) => v === profile[i]))
+		{
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 });
 
