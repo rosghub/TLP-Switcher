@@ -16,18 +16,17 @@ Using a browser that supports extension installation, visit https://extensions.g
 
 ## How To
 
-Place TLP configuration files in `~/.tlp/`.
+1. Place TLP configuration files in `~/.tlp/`.
 
-Create a new profile:
+2. Create a new profile:
+    * From currently running configuration (omitting any default settings):  
+        `tlp-stat -c | sed '/defaults.conf/d' | sed 's/.*L[0-9]\{4\}: //' > ~/.tlp/MyProfile`
 
-`tlp-stat -c > ~/.tlp/MyProfile`
+    * From template:  
+        `cp /etc/tlp.d/00-template.conf ~/.tlp/MyProfile`  
+        See https://linrunner.de/tlp/settings/ for details on the available parameters.
 
-or
-
-`cp /etc/default/tlp ~/.tlp/MyProfile`
-
-Selecting a profile will prompt you for root access to run [tlp_update.sh](tlp_update.sh). This script copys your profile to `/etc/default/tlp` and runs `tlp start`. 
-
+3. Selecting a profile will prompt you for root access to run [tlp_update.sh](tlp_update.sh). This script copys your profile to `/etc/tlp.conf` and runs `tlp start`.  
 Changes to `~/.tlp/` (adding/removing profiles) are reflected (not applied) automatically.
 
 ## Gnome Version
